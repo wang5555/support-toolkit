@@ -1,0 +1,9 @@
+# Ignored STK files
+
+# Ignored other files
+*.diff
+*.patch
+.DS_Store
+Thumbs.db
+*~
+
