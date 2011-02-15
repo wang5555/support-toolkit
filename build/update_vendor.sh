@@ -16,6 +16,14 @@ dirs=(
 
 )
 
+# Make sure that the script is ran from inside the
+# "build" directory
+basedir=$(dirname $0)
+if [ $basedir != "." ]; then
+	echo "This script must be ran from the STK build directory"
+	exit 1
+fi
+
 # Function that handles the copy
 copyLib()
 {
