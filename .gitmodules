@@ -1,0 +1,6 @@
+[submodule "vendor/UMIL"]
+	path = vendor/UMIL
+	url = https://github.com/phpbb/umil.git
+[submodule "vendor/phpBB"]
+	path = vendor/phpBB
+	url = https://github.com/phpbb/phpbb3.git
