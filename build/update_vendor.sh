@@ -46,6 +46,10 @@ copyLib()
 cd ..
 git submodule foreach git pull
 
+# Clear the existing lib dirs
+rm -rf ./stk/lib/phpBB
+rm -rf ./stk/lib/UMIL
+
 # Copy over the phpBB files
 for f in ${phpBB[@]}
 do
