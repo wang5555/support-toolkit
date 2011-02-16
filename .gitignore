@@ -1,4 +1,5 @@
 # Ignored STK files
+stk/lib
 
 # Ignored other files
 *.diff
