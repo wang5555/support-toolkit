@@ -8,8 +8,8 @@
  */
 
 define('IN_STK', true);
-define('STK_ROOT_PATH', __DIR__ . '/stk/');
-define('PHP_EXT', 'php');
+define('STK_ROOT_PATH', dirname(__FILE__) . '/../stk/');
+define('PHP_EXT', '.php');
 $table_prefix = 'phpbb_';
 
 error_reporting(E_ALL & ~E_DEPRECATED);
@@ -26,4 +26,4 @@ else
 }
 
 // Include common files 
-require __DIR__ . '/stk_test_case.' . PHP_EXT;
+require __DIR__ . '/stk_test_case' . PHP_EXT;
