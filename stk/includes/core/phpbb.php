@@ -1,7 +1,7 @@
 <?php
 /**
  *
- * @package SupportToolkit
+ * @package SupportToolkit-core
  * @copyright (c) 2011 phpBB Group
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
  *
@@ -20,7 +20,7 @@ if (!defined('IN_STK'))
  * this class maintains all connections to phpBB and should be used
  * whenever a call to phpBB related code is made
  *
- * @package SupportToolkit
+ * @package SupportToolkit-core
  */
 class stk_core_phpbb
 {

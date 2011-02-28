@@ -1,4 +1,5 @@
 # Ignored STK files
+docs
 stk/lib
 
 # Ignored other files

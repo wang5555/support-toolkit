@@ -1,7 +1,7 @@
 <?php
 /**
  *
- * @package SupportToolkit
+ * @package SupportToolkit-helpers
  * @copyright (c) 2011 phpBB Group
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
  *
@@ -18,7 +18,7 @@ if (!defined('IN_STK'))
 /**
  * Some helper functions for the phpBB core
  *
- * @package SupportToolkit
+ * @package SupportToolkit-helpers
  */
 class stk_helpers_phpbb
 {
