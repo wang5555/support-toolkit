@@ -1,7 +1,7 @@
 <?php
 /**
  *
- * @package Support Toolkit
+ * @package SupportToolkit
  * @copyright (c) 2011 phpBB Group
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
  *
@@ -26,6 +26,8 @@ if (!defined('IN_STK'))
  *
  * If every part of the class name is a directory, the last directory name is
  * also used as the filename, e.g. prefix_dir would resolve to dir/dir.php.
+ *
+ * @package SupportToolkit
  */
 class stk_autoloader
 {
@@ -51,7 +53,7 @@ class stk_autoloader
 	/**
 	 * Register the autoloader
 	 */
-	public function register()
+	private function register()
 	{
 		spl_autoload_register(array($this, 'autoload'));
 	}

@@ -1,17 +1,13 @@
 <?php
 /**
  *
- * @package Support Toolkit
+ * @package SupportToolkit
  * @copyright (c) 2011 phpBB Group
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
  *
  */
 
 /**
- */
-
-/**
- * @ignore
  */
 define('IN_STK', true);
 if (!defined('STK_ROOT_PATH')) define('STK_ROOT_PATH', dirname(__FILE__) . '/');
