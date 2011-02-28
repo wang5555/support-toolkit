@@ -141,6 +141,24 @@ class stk_helpers_phpbb
 	}
 
 	/**
+	 * Load extensions
+	 *
+	 * phpBB can load various extensions if needed, this method attempts the same
+	 * thing if needed
+	 */
+	public function load_extensions()
+	{
+		if (!empty($this->phpbb->db_config['load_extensions']) && function_exists('dl'))
+		{
+			$load_extensions = explode(',', $this->phpbb->db_config['load_extensions']);
+			foreach ($load_extensions as $extension)
+			{
+				@dl(trim($extension));
+			}
+		}
+	}
+
+	/**
 	 * Redirect the user to the phpBB installer
 	 *
 	 * @return void

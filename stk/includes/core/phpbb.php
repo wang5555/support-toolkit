@@ -147,14 +147,7 @@ class stk_core_phpbb
 			'load_extensions'	=> $load_extensions,
 		));
 
-		if (!empty($this->db_config['load_extensions']) && function_exists('dl'))
-		{
-			$load_extensions = explode(',', $this->db_config['load_extensions']);
-			foreach ($load_extensions as $extension)
-			{
-				@dl(trim($extension));
-			}
-		}
+		$this->helper->load_extensions();
 
 		// Include commonly used phpBB files that can't be autoloaded
 		$common_files = array('template', 'session', 'auth', 'functions', 'functions_content', 'constants', "db/{$dbms}", 'utf/utf_tools');
