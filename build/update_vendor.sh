@@ -3,12 +3,23 @@
 # to the correct location inside the STK package
 
 # List with phpBB files and directories that will be
-# copied from the phpBB repository into the stk/lib
+# copied from the phpBB repository into the stk/lib/phpBB
 # directory to be used by the STK. If you need a new
 # phpBB file/directory included into the STK don't
 # forget to add an entry into this list!
 phpBB=(
+	includes/auth.php
+	includes/constants.php
+	includes/functions.php
+	includes/functions_content.php
+	includes/session.php
+	includes/template.php
 
+	includes/cache/
+	includes/config/
+	includes/db/
+	includes/request/
+	includes/utf/
 )
 
 # Make sure that the script is ran from inside the

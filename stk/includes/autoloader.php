@@ -53,7 +53,7 @@ class stk_autoloader
 	/**
 	 * Register the autoloader
 	 */
-	private function register()
+	public function register()
 	{
 		spl_autoload_register(array($this, 'autoload'));
 	}
