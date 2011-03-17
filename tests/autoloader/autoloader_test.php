@@ -7,10 +7,7 @@
  *
  */
 
-if (!class_exists('stk_autoloader'))
-{
-	require STK_ROOT_PATH . 'includes/autoloader' . PHP_EXT;
-}
+require_once STK_ROOT_PATH . 'includes/autoloader' . PHP_EXT;
 
 class stk_autoloader_test extends stk_test_case
 {
