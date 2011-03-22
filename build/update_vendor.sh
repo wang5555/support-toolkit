@@ -30,6 +30,19 @@ if [ $basedir != "." ]; then
 	exit 1
 fi
 
+# Check whether we want to update the repository, or only
+# copying over the vendor files
+update=false
+while [ $# -gt 0 ]
+do
+	case "$1" in
+		-u)
+			update=true
+		;;
+	esac
+	shift
+done
+
 # Function that handles the copy
 copyLib()
 {
@@ -55,7 +68,11 @@ copyLib()
 
 # Make sure that the vendor submodules are updated
 cd ..
-git submodule foreach git pull
+if [ $update = true ]; then
+	git submodule foreach git pull
+else
+	git submodule foreach git init
+fi
 
 # Clear the existing lib dirs
 rm -rf ./stk/lib/phpBB
