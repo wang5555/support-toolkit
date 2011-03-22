@@ -62,6 +62,17 @@ class stk_autoloader_test extends stk_test_case
 	}
 
 	/**
+	 * Class with sub dir as class
+	 * `test_dir_sub` => `files/dir/sub/sub.php`
+	 */
+	public function test_class_as_sub_dir()
+	{
+		$class_name = 'test_dir_sub';
+		$expected_path = $this->include_path . 'dir/sub/sub' . PHP_EXT;
+		$this->assertEquals($expected_path, $this->al->get_path($class_name), 'Couldn\'t resolve the path for a class with the name of a sub directory');
+	}
+
+	/**
 	 * Deeply nested class
 	 * `test_dir_sub_sub2_class_name` => `files/dir/sub/sub2/class_name.php`
 	 */

@@ -107,7 +107,8 @@ class stk_autoloader
 		$parts = explode('_', $class);
 		array_shift($parts);
 
-		$dirs = $file = '';
+		$dirs = '';
+		$file = end($parts); // Unless determined different the last part is the file name
 		while (null !== ($part = array_shift($parts)))
 		{
 			if (!is_dir($this->include_path . $dirs . $part))
@@ -117,12 +118,6 @@ class stk_autoloader
 				break;
 			}
 			$dirs .= "{$part}/";
-		}
-
-		// $file is empty so the class name is the same as the last directory
-		if (empty($file))
-		{
-			$file = substr($dirs, strrpos('/', $dirs), -1);
 		}
 
 		// Check and return the path
