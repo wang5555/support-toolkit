@@ -25,26 +25,6 @@ if (!defined('IN_STK'))
 class stk_core_phpbb
 {
 	/**
-	 * @var auth Instance of the phpBB Auth object
-	 */
-	public $auth = null;
-
-	/**
-	 * @var phpbb_cache_service Instance of the phpBB Cache object
-	 */
-	public $cache = null;
-
-	/**
-	 * @var phpbb_config Instance of the phpBB config object
-	 */
-	public $config = null;
-
-	/**
-	 * @var dbal Instance of the phpBB DBAL
-	 */
-	public $db = null;
-
-	/**
 	 * @var phpbb_config A phpBB config object holding all data stored in the config.php
 	 */
 	public $db_config = null;
@@ -58,21 +38,6 @@ class stk_core_phpbb
 	 * @var String Absolute path to the phpBB files used by the STK
 	 */
 	public $files_path = '';
-
-	/**
-	 * @var phpbb_request Instance of the phpBB request class
-	 */
-	public $request = null;
-
-	/**
-	 * @var template Instance of the phpBB template object
-	 */
-	public $template = null;
-
-	/**
-	 * @var session Instance of the phpBB user/session object
-	 */
-	public $user = null;
 
 	/**
 	 * Relative path to the users phpBB installation
@@ -93,17 +58,6 @@ class stk_core_phpbb
 		$phpbb_autoloader->register();
 
 		$this->helper = new stk_helpers_phpbb($this);
-
-		// A little bit of trickery to store the common phpBB objects
-		// in this class but at the same time, not braking phpBB itself
-		global $auth, $cache, $config, $db, $request, $template, $user;
-		$this->auth		=& $auth;
-		$this->cache	=& $cache;
-		$this->config	=& $config;
-		$this->db		=& $db;
-		$this->request	=& $request;
-		$this->template	=& $template;
-		$this->user		=& $user;
 
 		// Make sure that phpBB understands the paths
 		global $phpbb_root_path, $phpEx;
@@ -150,7 +104,7 @@ class stk_core_phpbb
 		$this->helper->load_extensions();
 
 		// Include commonly used phpBB files that can't be autoloaded
-		$common_files = array('template', 'session', 'auth', 'functions', 'functions_content', 'constants', "db/{$dbms}", 'utf/utf_tools');
+		$common_files = array('template', 'session', 'auth', 'functions', 'functions_content', 'constants', "db/{$dbms}", 'hooks/index', 'utf/utf_tools');
 		foreach ($common_files as $cf)
 		{
 			require("{$this->files_path}includes/{$cf}" . PHP_EXT);

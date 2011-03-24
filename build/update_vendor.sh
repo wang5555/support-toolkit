@@ -18,6 +18,7 @@ phpBB=(
 	includes/cache/
 	includes/config/
 	includes/db/
+	includes/hooks/
 	includes/request/
 	includes/utf/
 )

@@ -22,8 +22,9 @@ if (function_exists('memory_get_usage'))
 	$base_memory_usage = memory_get_usage();
 }
 
-// Include constants
+// Include STK constants and main functions
 require STK_ROOT_PATH . 'includes/constants' . PHP_EXT;
+require STK_ROOT_PATH . 'includes/functions' . PHP_EXT;
 
 // Report all errors, except notices and deprecation messages
 error_reporting(E_ALL ^ E_NOTICE ^ E_DEPRECATED);
@@ -40,26 +41,28 @@ $phpbb->initialise();
 
 // set up caching
 $cache_factory = new phpbb_cache_factory($phpbb->db_config['acm_type']);
-$phpbb->cache = $cache_factory->get_service();
+$cache = $cache_factory->get_service();
 
 // Construct some phpBB core classes
-$phpbb->request		= new phpbb_request();
-$phpbb->user		= new user();
-$phpbb->auth		= new auth();
-$phpbb->template	= new template();
-$phpbb->db			= new $sql_db();
+$auth		= new auth();
+$db			= new $sql_db();
+// Passes an empty array, hooks should be setup in `phpbb_hook_register`
+$phpbb_hook	= new phpbb_hook(array());
+$request	= new phpbb_request();
+$template	= new template();
+$user		= new user();
 
 // make sure request_var uses this request instance
 request_var('', 0, false, false, $request); // "dependency injection" for a function
 
 // Connect to DB
-$phpbb->db->sql_connect($phpbb->db_config['dbhost'], $phpbb->db_config['dbuser'], $phpbb->db_config['dbpasswd'], $phpbb->db_config['dbname'], $phpbb->db_config['dbport'], false, defined('PHPBB_DB_NEW_LINK') ? PHPBB_DB_NEW_LINK : false);
+$db->sql_connect($phpbb->db_config['dbhost'], $phpbb->db_config['dbuser'], $phpbb->db_config['dbpasswd'], $phpbb->db_config['dbname'], $phpbb->db_config['dbport'], false, defined('PHPBB_DB_NEW_LINK') ? PHPBB_DB_NEW_LINK : false);
 
 // We do not need this any longer, unset for safety purposes
 // Not possible atm due to: #PHPBB3-10006
 //$phpbb->db_config->delete('dbpasswd');
 
 // Grab global variables, re-cache if necessary
-$phpbb->config = new phpbb_config_db($db, $cache->get_driver(), CONFIG_TABLE);
+$config = new phpbb_config_db($db, $cache->get_driver(), CONFIG_TABLE);
 set_config(null, null, null, $config);
 set_config_count(null, null, null, $config);
