@@ -12,12 +12,12 @@ require_once STK_ROOT_PATH . 'includes/autoloader' . PHP_EXT;
 class stk_autoloader_test extends stk_test_case
 {
 	private $al = null;
-	private $include_path = '';
+	static private $include_path = '';
 
-	protected function setUp()
+	public function setUp()
 	{
-		$this->include_path = dirname(__FILE__) . '/files/';
-		$this->al = new stk_autoloader($this->include_path, 'test_', PHP_EXT);
+		self::$include_path = dirname(__FILE__) . '/files/';
+		$this->al = new stk_autoloader(self::$include_path, 'test_', PHP_EXT);
 	}
 
 	/**
@@ -30,56 +30,48 @@ class stk_autoloader_test extends stk_test_case
 	}
 
 	/**
-	 * The class name is `test_class` and the path should be `files/class.php`
+	 * Test autoload result
 	 */
-	public function test_class_first_dir()
+	public function test_autoload()
 	{
-		$class_name = 'test_class';
-		$expected_path = $this->include_path . 'class' . PHP_EXT;
-		$this->assertEquals($expected_path, $this->al->get_path($class_name), 'Couldn\'t resolve the path for a top level class');
+		$this->assertNotContains(self::$include_path . 'class' . PHP_EXT, get_included_files());
+		$this->al->autoload('test_class');
+		$this->assertContains(self::$include_path . 'class' . PHP_EXT, get_included_files());
 	}
 
 	/**
-	 * Class in a sub dir
-	 * `test_dir_class` => `files/dir/class.php`
+	 * Returns all the information for the load tests
 	 */
-	public function test_class_dir()
+	public static function get_load_tests()
 	{
-		$class_name = 'test_dir_class';
-		$expected_path = $this->include_path . 'dir/class' . PHP_EXT;
-		$this->assertEquals($expected_path, $this->al->get_path($class_name), 'Couldn\'t resolve the path for a class inside a directory');
+		return array(
+			// `test_class` => `files/class.php
+			array('test_class',						'class' . PHP_EXT,						'Couldn\'t resolve the path for a top level class'),
+			// `test_dir_class` => `files/dir/class.php`
+			array('test_dir_class',					'dir/class' . PHP_EXT,					'Couldn\'t resolve the path for a class inside a directory'),
+			// `test_dir` => `files/dir/dir.php`
+			array('test_dir',						'dir/dir' . PHP_EXT,					'Couldn\'t resolve the path for a class with the directory name'),
+			// `test_dir_sub` => `files/dir/sub/sub.php`
+			array('test_dir_sub',					'dir/sub/sub' . PHP_EXT,				'Couldn\'t resolve the path for a class with the name of a sub directory'),
+			// Non existing
+			array('test_dir_nf',					'',										'Couldn\'t resolve the path for a non existing file'),
+			// `test_dir_sub_sub2_class_name` => `files/dir/sub/sub2/class_name.php`
+			array('test_dir_sub_sub2_class_name',	'dir/sub/sub2/class_name' . PHP_EXT,	'Couldn\'t resolve the path for a deeply nested class'),
+		);
 	}
 
 	/**
-	 * Class with dir name as class
-	 * `test_dir` => `files/dir/dir.php`
+	 * Run various tests for the `get_path` method
+	 * @dataProvider get_load_tests
 	 */
-	public function test_class_as_dir()
+	public function test_get_path($class, $expected, $error)
 	{
-		$class_name = 'test_dir';
-		$expected_path = $this->include_path . 'dir/dir' . PHP_EXT;
-		$this->assertEquals($expected_path, $this->al->get_path($class_name), 'Couldn\'t resolve the path for a class with the directory name');
-	}
+		// Append the prefix for all but the empty test
+		if (!empty($expected))
+		{
+			$expected = self::$include_path . $expected;
+		}
 
-	/**
-	 * Class with sub dir as class
-	 * `test_dir_sub` => `files/dir/sub/sub.php`
-	 */
-	public function test_class_as_sub_dir()
-	{
-		$class_name = 'test_dir_sub';
-		$expected_path = $this->include_path . 'dir/sub/sub' . PHP_EXT;
-		$this->assertEquals($expected_path, $this->al->get_path($class_name), 'Couldn\'t resolve the path for a class with the name of a sub directory');
-	}
-
-	/**
-	 * Deeply nested class
-	 * `test_dir_sub_sub2_class_name` => `files/dir/sub/sub2/class_name.php`
-	 */
-	public function test_class_nested_deep()
-	{
-		$class_name = 'test_dir_sub_sub2_class_name';
-		$expected_path = $this->include_path . 'dir/sub/sub2/class_name' . PHP_EXT;
-		$this->assertEquals($expected_path, $this->al->get_path($class_name), 'Couldn\'t resolve the path for a deeply nested class');
+		$this->assertEquals($expected, $this->al->get_path($class), $error);
 	}
 }
