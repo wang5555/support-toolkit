@@ -36,7 +36,6 @@ $autoloader->register();
 
 // Include and setup the two main classes
 $phpbb = new stk_core_phpbb(STK_LIB_PATH . 'phpBB/');
-$stk = new stk_core($phpbb);
 $phpbb->initialise();
 
 // set up caching
@@ -66,3 +65,9 @@ $db->sql_connect($phpbb->db_config['dbhost'], $phpbb->db_config['dbuser'], $phpb
 $config = new phpbb_config_db($db, $cache->get_driver(), CONFIG_TABLE);
 set_config(null, null, null, $config);
 set_config_count(null, null, null, $config);
+
+// Disable the internal cron system
+$config['use_system_cron'] = true;
+
+// Initialise the STK core
+$stk = new stk_core($phpbb);
