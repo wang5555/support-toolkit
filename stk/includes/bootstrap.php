@@ -58,8 +58,7 @@ request_var('', 0, false, false, $request); // "dependency injection" for a func
 $db->sql_connect($phpbb->db_config['dbhost'], $phpbb->db_config['dbuser'], $phpbb->db_config['dbpasswd'], $phpbb->db_config['dbname'], $phpbb->db_config['dbport'], false, defined('PHPBB_DB_NEW_LINK') ? PHPBB_DB_NEW_LINK : false);
 
 // We do not need this any longer, unset for safety purposes
-// Not possible atm due to: #PHPBB3-10006
-//$phpbb->db_config->delete('dbpasswd');
+$phpbb->db_config->delete('dbpasswd');
 
 // Grab global variables, re-cache if necessary
 $config = new phpbb_config_db($db, $cache->get_driver(), CONFIG_TABLE);
