@@ -39,6 +39,9 @@ $phpbb = new stk_core_phpbb(STK_LIB_PATH . 'phpBB/');
 $phpbb->initialise();
 
 // set up caching
+// Force to null cache for the time being due to: PHPBB3-9610
+// @todo remove when the bug is resolved
+$phpbb->db_config['acm_type'] = 'null';
 $cache_factory = new phpbb_cache_factory($phpbb->db_config['acm_type']);
 $cache = $cache_factory->get_service();
 
