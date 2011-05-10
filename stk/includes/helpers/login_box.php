@@ -196,12 +196,12 @@ class stk_helpers_login_box
 		{
 			case LOGIN_ERROR_ATTEMPTS:
 
-				$captcha = phpbb_captcha_factory::get_instance($this->config['captcha_plugin']);
+				$captcha = phpbb_captcha_factory::get_instance('phpbb_captcha_nogd');
 				$captcha->init(CONFIRM_LOGIN);
 				// $captcha->reset();
 
 				$template->assign_vars(array(
-					'CAPTCHA_TEMPLATE'			=> $captcha->get_template(),
+					'CAPTCHA_TEMPLATE' => $captcha->get_template(),
 				));
 
 				$err = $this->user->lang[$result['error_msg']];
@@ -214,7 +214,7 @@ class stk_helpers_login_box
 				// Assign admin contact to some error messages
 				if ($result['error_msg'] == 'LOGIN_ERROR_USERNAME' || $result['error_msg'] == 'LOGIN_ERROR_PASSWORD')
 				{
-					$err = (!$config['board_contact']) ? sprintf($user->lang[$result['error_msg']], '', '') : sprintf($user->lang[$result['error_msg']], '<a href="mailto:' . htmlspecialchars($config['board_contact']) . '">', '</a>');
+					$err = (!$this->config['board_contact']) ? sprintf($this->user->lang[$result['error_msg']], '', '') : sprintf($this->user->lang[$result['error_msg']], '<a href="mailto:' . htmlspecialchars($this->config['board_contact']) . '">', '</a>');
 				}
 
 			break;
