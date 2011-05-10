@@ -125,9 +125,6 @@ class stk_core_phpbb
 		$user->session_begin();
 		$auth->acl($user->data);
 
-		// Manually overwrite some user vars to work with our current setup
-		$user->lang_path = self::PHPBB_ROOT_PATH . 'language/';
-
 		// Setup phpBB
 		$user->setup();
 	}

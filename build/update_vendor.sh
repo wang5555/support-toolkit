@@ -12,10 +12,13 @@ phpBB=(
 	includes/constants.php
 	includes/functions.php
 	includes/functions_content.php
+	includes/functions_template.php
 	includes/session.php
 	includes/template.php
 
+	includes/auth/
 	includes/cache/
+	includes/captcha/
 	includes/config/
 	includes/db/
 	includes/hooks/

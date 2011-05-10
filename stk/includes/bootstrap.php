@@ -38,6 +38,10 @@ $autoloader->register();
 $phpbb = new stk_core_phpbb(STK_LIB_PATH . 'phpBB/');
 $phpbb->initialise();
 
+// Set PHP error handler to ours
+// @todo, add a STK error handler
+set_error_handler(defined('PHPBB_MSG_HANDLER') ? PHPBB_MSG_HANDLER : 'msg_handler');
+
 // set up caching
 // Force to null cache for the time being due to: PHPBB3-9610
 // @todo remove when the bug is resolved
@@ -51,8 +55,8 @@ $db			= new $sql_db();
 // Passes an empty array, hooks should be setup in `phpbb_hook_register`
 $phpbb_hook	= new phpbb_hook(array());
 $request	= new phpbb_request();
-$template	= new stk_core_template();
-$user		= new user();
+$template	= new stk_core_template($phpbb);
+$user		= new stk_core_user();
 
 // make sure request_var uses this request instance
 request_var('', 0, false, false, $request); // "dependency injection" for a function
@@ -72,4 +76,4 @@ set_config_count(null, null, null, $config);
 $config['use_system_cron'] = true;
 
 // Initialise the STK core
-$stk = new stk_core($phpbb);
+$stk = new stk_core($phpbb, $user, $config);

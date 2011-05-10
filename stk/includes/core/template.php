@@ -24,6 +24,18 @@ if (!defined('IN_STK'))
 class stk_core_template extends template
 {
 	/**
+	 * Construct the template object
+	 */
+	public function __construct(stk_core_phpbb $phpbb)
+	{
+		// Include the template functions
+		if (!class_exists('template_compile'))
+		{
+			include($phpbb->files_path . 'includes/functions_template' . PHP_EXT);
+		}
+	}
+
+	/**
 	 * Set template location
 	 *
 	 * Overload the phpBB template::set_template method, sets the
