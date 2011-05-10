@@ -110,4 +110,22 @@ class stk_core_phpbb
 			require("{$this->files_path}includes/{$cf}" . PHP_EXT);
 		}
 	}
+
+	/**
+	 * Initialises the phpBB sessions, and setup phpBB
+	 *
+	 * @param  auth     $auth     The phpBB auth object
+	 * @param  user     $user     The phpBB user object
+	 * @param  template $template The phpBB template object
+	 * @return void
+	 */
+	public function session_and_setup(auth $auth, user $user, template $template)
+	{
+		// First the sessions
+		$user->session_begin();
+		$auth->acl($user->data);
+
+		// Setup phpBB
+		$user->setup();
+	}
 }

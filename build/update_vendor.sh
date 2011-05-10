@@ -12,9 +12,15 @@ phpBB=(
 	includes/constants.php
 	includes/functions.php
 	includes/functions_content.php
+	includes/functions_template.php
 	includes/session.php
 	includes/template.php
 
+	includes/captcha/captcha_factory.php
+	includes/captcha/plugins/captcha_abstract.php
+	includes/captcha/plugins/phpbb_captcha_nogd_plugin.php
+
+	includes/auth/
 	includes/cache/
 	includes/config/
 	includes/db/
