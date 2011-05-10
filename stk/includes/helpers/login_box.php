@@ -30,7 +30,7 @@ class stk_helpers_login_box
 	private $template	= null;
 	private $user		= null;
 
-	public function __construct(auth $auth, phpbb_config_db $config, stk_core_phpbb $phpbb, phpbb_request $request, stk_core $stk, stk_core_template $template, stk_core_user $user)
+	public function __construct(auth $auth, phpbb_config_db $config, stk_phpbb $phpbb, phpbb_request $request, stk_core $stk, stk_phpbb_template $template, stk_phpbb_user $user)
 	{
 		$this->auth		= $auth;
 		$this->config	= $config;

@@ -35,7 +35,7 @@ $autoloader = new stk_autoloader(STK_INCLUDE_PATH, 'stk');
 $autoloader->register();
 
 // Include and setup the two main classes
-$phpbb = new stk_core_phpbb(STK_LIB_PATH . 'phpBB/');
+$phpbb = new stk_phpbb(STK_LIB_PATH . 'phpBB/');
 $phpbb->initialise();
 
 // Set PHP error handler to ours
@@ -55,8 +55,8 @@ $db			= new $sql_db();
 // Passes an empty array, hooks should be setup in `phpbb_hook_register`
 $phpbb_hook	= new phpbb_hook(array());
 $request	= new phpbb_request();
-$template	= new stk_core_template($phpbb);
-$user		= new stk_core_user();
+$template	= new stk_phpbb_template($phpbb);
+$user		= new stk_phpbb_user();
 
 // make sure request_var uses this request instance
 request_var('', 0, false, false, $request); // "dependency injection" for a function

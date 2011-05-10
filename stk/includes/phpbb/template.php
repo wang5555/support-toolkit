@@ -21,12 +21,12 @@ if (!defined('IN_STK'))
  * This class overloads some of the phpBB methods to
  * assure proper working within the Support Toolkit
  */
-class stk_core_template extends template
+class stk_phpbb_template extends template
 {
 	/**
 	 * Construct the template object
 	 */
-	public function __construct(stk_core_phpbb $phpbb)
+	public function __construct(stk_phpbb $phpbb)
 	{
 		// Include the template functions
 		if (!class_exists('template_compile'))
@@ -50,7 +50,7 @@ class stk_core_template extends template
 		if (file_exists($stk_template_loc))
 		{
 			$this->root = $stk_template_loc;
-			$this->cachepath = stk_core_phpbb::PHPBB_ROOT_PATH . 'cache/tpl_STK_';
+			$this->cachepath = stk_phpbb::PHPBB_ROOT_PATH . 'cache/tpl_STK_';
 
 			$user->theme['template_storedb']		= false;
 			$user->theme['template_inherits_id']	= false;

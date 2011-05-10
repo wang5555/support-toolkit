@@ -22,7 +22,7 @@ if (!defined('IN_STK'))
  *
  * @package SupportToolkit-core
  */
-class stk_core_phpbb
+class stk_phpbb
 {
 	/**
 	 * @var phpbb_config A phpBB config object holding all data stored in the config.php

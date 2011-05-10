@@ -22,14 +22,14 @@ if (!defined('IN_STK'))
  * as well overwrites some phpBB variables/methods to
  * assure that data is loaded correctly.
  */
-class stk_core_user extends user
+class stk_phpbb_user extends user
 {
 	/**
 	 * Construct the user class, also sets the language path
 	 */
 	public function __construct()
 	{
-		$this->lang_path = stk_core_phpbb::PHPBB_ROOT_PATH . 'language/';
+		$this->lang_path = stk_phpbb::PHPBB_ROOT_PATH . 'language/';
 	}
 
 	/**

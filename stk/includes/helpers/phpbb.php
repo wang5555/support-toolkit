@@ -23,16 +23,16 @@ if (!defined('IN_STK'))
 class stk_helpers_phpbb
 {
 	/**
-	 * @var stk_core_phpbb Instance of the phpBB wrapper object
+	 * @var stk_phpbb Instance of the phpBB wrapper object
 	 */
 	private $phpbb = null;
 
 	/**
 	 * Setup the helper class
 	 *
-	 * @param stk_core_phpbb $phpbb Instance of the main phpBB core object
+	 * @param stk_phpbb $phpbb Instance of the main phpBB core object
 	 */
-	public function __construct(stk_core_phpbb $phpbb)
+	public function __construct(stk_phpbb $phpbb)
 	{
 		$this->phpbb = $phpbb;
 	}

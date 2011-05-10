@@ -30,13 +30,13 @@ class stk_core
 
 	/**
 	 * Instance of the phpBB wrapper class
-	 * @var stk_core_phpbb
+	 * @var stk_phpbb
 	 */
 	private $phpbb = null;
 
 	/**
 	 * Instance of the STK user object
-	 * @var stk_core_user
+	 * @var stk_phpbb_user
 	 */
 	private $user = null;
 
@@ -50,11 +50,11 @@ class stk_core
 	/**
 	 * Construct the STK core
 	 *
-	 * @param stk_core_phpbb  $phpbb  Instance of the phpBB wrapper class
-	 * @param stk_core_user   $user   Instance of the STK user object
+	 * @param stk_phpbb  $phpbb  Instance of the phpBB wrapper class
+	 * @param stk_phpbb_user   $user   Instance of the STK user object
 	 * @param phpbb_config_db $config phpBB configuration data
 	 */
-	public function __construct(stk_core_phpbb $phpbb, stk_core_user $user, phpbb_config_db $config)
+	public function __construct(stk_phpbb $phpbb, stk_phpbb_user $user, phpbb_config_db $config)
 	{
 		$this->config	= $config;
 		$this->phpbb	= $phpbb;
