@@ -51,7 +51,7 @@ $db			= new $sql_db();
 // Passes an empty array, hooks should be setup in `phpbb_hook_register`
 $phpbb_hook	= new phpbb_hook(array());
 $request	= new phpbb_request();
-$template	= new template();
+$template	= new stk_core_template();
 $user		= new user();
 
 // make sure request_var uses this request instance
