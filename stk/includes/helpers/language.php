@@ -69,6 +69,12 @@ class stk_helpers_language
 	 */
 	public function set_lang(&$lang, &$help, $lang_file, $use_db = false, $use_help = false, $force_lang = '')
 	{
+		// Possible to be called empty
+		if (empty($lang_file))
+		{
+			return;
+		}
+
 		// Determine the correct language set to be used for this file
 		$lang_name = '';
 		if (empty($force_lang))

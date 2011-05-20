@@ -49,21 +49,9 @@ $phpbb->db_config['acm_type'] = 'null';
 $cache_factory = new phpbb_cache_factory($phpbb->db_config['acm_type']);
 $cache = $cache_factory->get_service();
 
-// Construct some phpBB core classes
-$auth		= new auth();
-$db			= new $sql_db();
-// Passes an empty array, hooks should be setup in `phpbb_hook_register`
-$phpbb_hook	= new phpbb_hook(array());
-$request	= new phpbb_request();
-$template	= new stk_phpbb_template($phpbb);
-$user		= new stk_phpbb_user();
-
-// make sure request_var uses this request instance
-request_var('', 0, false, false, $request); // "dependency injection" for a function
-
 // Connect to DB
+$db = new $sql_db();
 $db->sql_connect($phpbb->db_config['dbhost'], $phpbb->db_config['dbuser'], $phpbb->db_config['dbpasswd'], $phpbb->db_config['dbname'], $phpbb->db_config['dbport'], false, defined('PHPBB_DB_NEW_LINK') ? PHPBB_DB_NEW_LINK : false);
-
 // We do not need this any longer, unset for safety purposes
 $phpbb->db_config->delete('dbpasswd');
 
@@ -71,6 +59,17 @@ $phpbb->db_config->delete('dbpasswd');
 $config = new phpbb_config_db($db, $cache->get_driver(), CONFIG_TABLE);
 set_config(null, null, null, $config);
 set_config_count(null, null, null, $config);
+
+// Construct some phpBB core classes
+$auth		= new auth();
+// Passes an empty array, hooks should be setup in `phpbb_hook_register`
+$phpbb_hook	= new phpbb_hook(array());
+$request	= new phpbb_request();
+$template	= new stk_phpbb_template($phpbb);
+$user		= new stk_phpbb_user($config);
+
+// make sure request_var uses this request instance
+request_var('', 0, false, false, $request); // "dependency injection" for a function
 
 // Disable the internal cron system
 $config['use_system_cron'] = true;
