@@ -26,4 +26,4 @@ else
 }
 
 // Include common files 
-require __DIR__ . '/stk_test_case' . PHP_EXT;
+require dirname(__FILE__) . '/stk_test_case' . PHP_EXT;

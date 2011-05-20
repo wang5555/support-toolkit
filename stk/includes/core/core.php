@@ -29,6 +29,12 @@ class stk_core
 	private $config = null;
 
 	/**
+	 * The STK language helper
+	 * @var stk_helpers_language
+	 */
+	private $lang_helper = null;
+
+	/**
 	 * Instance of the phpBB wrapper class
 	 * @var stk_phpbb
 	 */
@@ -89,76 +95,22 @@ class stk_core
 	 * @param bool   $use_db     internal variable for recursion, do not use
 	 * @param bool   $use_help   internal variable for recursion, do not use
 	 */
-	public function add_lang($lang_set, $force_lang = false, $use_db = false, $use_help = false)
+	public function add_lang($lang_set, $force_lang = '', $use_db = false, $use_help = false)
 	{
+		// Make sure the helper is loaded
+		if (is_null($this->lang_helper))
+		{
+			$this->lang_helper = new stk_helpers_language(STK_ROOT_PATH . 'language', basename($this->config['default_lang']), $this->user->data['user_lang']);
+		}
+
 		if (!is_array($lang_set))
 		{
 			$lang_set = array($lang_set);
 		}
 
-		// Internally cache some data
-		static $lang_data = array();
-		static $lang_dirs = array();
-
-		// Store current phpBB data
-		if (empty($lang_data))
-		{
-			$lang_data = array(
-				'lang_path'	=> $this->user->lang_path,
-				'lang_name'	=> $this->user->lang_name,
-			);
-		}
-
-		// Empty the lang_name
-		$this->user->lang_name = '';
-
-		// Find out what languages we could use
-		if (empty($lang_dirs))
-		{
-			$lang_dirs = array(
-				$this->user->data['user_lang'],				// User default
-				basename($this->config['default_lang']),	// Board default
-				'en',										// System default
-			);
-	
-			// Only unique dirs
-			$lang_dirs = array_unique($lang_dirs);
-		}
-
-		// Switch to the STK language dir
-		$this->user->lang_path = STK_ROOT_PATH . 'language/';
-
-		// Test and include all files from the set
 		foreach ($lang_set as $lang_file)
 		{
-			// Test all languages
-			foreach ($lang_dirs as $dir)
-			{
-				// When forced skip all others
-				if (!empty($force_lang) && $dir != $force_lang)
-				{
-					continue;
-				}
-
-				if (file_exists($this->user->lang_path . $dir . "/{$lang_file}" . PHP_EXT))
-				{
-					$this->user->lang_name = $dir;
-					break;
-				}
-			}
-
-			// No language file :/
-			if (empty($this->user->lang_name))
-			{
-				trigger_error("Language file: {$lang_file}" . PHP_EXT . ' missing!', E_USER_ERROR);
-			}
-
-			// Add the file
-			$this->user->add_lang($lang_file);
+			$this->lang_helper->set_lang($this->user->lang, $this->user->help, $lang_file, $use_db, $use_help, $force_lang);
 		}
-
-		// Now reset the paths so phpBB can continue to operate as usual
-		$this->user->lang_path = $lang_data['lang_path'];
-		$this->user->lang_name = $lang_data['lang_name'];
 	}
 }
