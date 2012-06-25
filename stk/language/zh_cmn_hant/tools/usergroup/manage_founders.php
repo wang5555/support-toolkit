@@ -38,6 +38,8 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
+	'BOTH_FIELDS_FILLED'		=> '會員名稱和會員 ID 可能都沒有被填寫。',
+
 	'DEMOTE_FAILED'				=> '無法移除所有會員的創始者地位！',
 	'DEMOTE_FOUNDERS'			=> '自創始者降級',
 	'DEMOTE_SUCCESSFULL'		=> '已經成功地移除會員 %d 之創始者地位！',
@@ -54,8 +56,10 @@ $lang = array_merge($lang, array(
 
 	'PROMOTE_FOUNDER'			=> '升級為創始者',
 
-	'USER_TO_FOUNDER'			=> '讓會員成為論壇創始者',
-	'USER_TO_FOUNDER_EXPLAIN'	=> '輸入您想要升級為創始者的會員之會員名稱或會員 ID。',
+	'USER_NAME_TO_FOUNDER'			=> '成為論壇創始者之會員名稱',
+	'USER_NAME_TO_FOUNDER_EXPLAIN'	=> '輸入您想要讓他成為論壇創始者的會員之會員名稱。',
+	'USER_ID_TO_FOUNDER'			=> '成為論壇創始者之會員 ID',
+	'USER_ID_TO_FOUNDER_EXPLAIN'	=> '輸入您想要讓他成為論壇創始者的會員之會員 ID。',
 ));
 
 ?>
