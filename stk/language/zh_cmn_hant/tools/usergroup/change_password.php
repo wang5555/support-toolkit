@@ -39,13 +39,18 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 	'CHANGE_PASSWORD'			=> '改變密碼',
-	'CHANGE_PASSWORD_EXPLAIN'	=> '改變會員的密碼。',
+	'CHANGE_PASSWORD_EXPLAIN'	=> '改變會員的密碼。<br /><strong>您可以輸入會員名稱或會員 ID。</strong>',
 	'CHANGE_PASSWORD_SUCCESS'	=> '<a href="%s">%s</a> 的密碼已經成功地改變。',
+
+	'FIELDS_NOT_FILLED'			=> '有一個欄位必須填寫。',
+	'FIELDS_BOTH_FILLED'		=> '只有一個欄位可能被填寫。',
 
 	'PASSWORD_CONFIRM'			=> '重新輸入密碼',
 
-	'USERNAMEID'				=> '會員名稱或會員 ID',
-	'USERNAMEID_EXPLAIN'		=> '輸入您想要改變密碼的會員之會員名稱或會員 ID。',
+	'USERNAME_NAME'				=> '會員名稱',
+	'USERNAME_NAME_EXPLAIN'		=> '輸入您想要改變密碼的會員之會員名稱。',
+	'USERNAMEID'				=> '會員 ID',
+	'USERNAMEID_EXPLAIN'		=> '輸入您想要改變密碼的會員之會員 ID。',
 ));
 
 ?>
