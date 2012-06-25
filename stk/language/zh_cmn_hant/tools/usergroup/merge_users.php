@@ -40,7 +40,7 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 	'MERGE_USERS'						=> '合併會員',
-	'MERGE_USERS_EXPLAIN'				=> '此工具移動某會員帳號轉入另一位會員帳號，來源會員的設定以及群組將被複製。包含會員權限、附加檔案、禁止、我的最愛、草稿、論壇/主題追蹤、論壇/主題訂閱、記錄、投票、文章、私訊、檢舉、主題、警告、好友以及黑名單。',
+	'MERGE_USERS_EXPLAIN'				=> '此工具移動某會員帳號轉入另一位會員帳號，來源會員的設定以及群組將被複製。包含會員權限、附加檔案、禁止、我的最愛、草稿、論壇/主題追蹤、論壇/主題訂閱、記錄、投票、文章、私訊、檢舉、主題、警告、好友以及黑名單。<br /><strong>您可以輸入會員名稱或會員 ID。</strong>',
 
 	'MERGE_USERS_BOTH_FOUNDERS'	=> '您不能合併創始者與非創始者。',
 	'MERGE_USERS_BOTH_IGNORE'	=> '您不能合併機器人與一般會員。',
@@ -52,10 +52,18 @@ $lang = array_merge($lang, array(
 
 	'MERGE_USERS_SAME_USERS'	=> '來源會員以及目標會員必須不同。',
 
-	'MERGE_USERS_USER_SOURCE'			=> '來源會員',
-	'MERGE_USERS_USER_SOURCE_EXPLAIN'	=> '將從這個會員的文章、私訊、權限、警告等，轉入目標會員，而會員群組以及個人設定，也將被複製。',
+	'MERGE_USERS_USER_SOURCE_NAME'			=> '來源會員。（會員名稱）',
+	'MERGE_USERS_USER_SOURCE_ID'			=> '來源會員。（會員 ID）',
+	'MERGE_USERS_USER_SOURCE_NAME_EXPLAIN'	=> 'P將從這個會員的文章、私訊、權限、警告等，轉入目標會員，而會員群組以及個人設定，也將被複製。',
 
-	'MERGE_USERS_USER_TARGET'	=> '目標會員',
+	'MERGE_USERS_USER_TARGET_NAME'	=> '目標會員。（會員名稱）',
+	'MERGE_USERS_USER_TARGET_ID'	=> '目標會員。（會員 ID）',
+
+	'NO_SOURCE_USER'		=> '請求的來源會員不存在',
+	'NO_TARGET_USER'		=> '請求的目標會員不存在',
+
+	'BOTH_SOURCE_USER'		=> '只填寫一個來源欄位。',
+	'BOTH_TARGET_USER'		=> '只填寫一個目標欄位。',
 ));
 
 ?>
